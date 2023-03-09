@@ -5,16 +5,18 @@ input.onButtonPressed(Button.A, function () {
         messen = 1
     }
 })
-input.onButtonPressed(Button.B, function () {
-    if (mode == 1) {
-        messen = 0
-    } else {
-        mode = 1
+input.onButtonPressed(Button.AB, function () {
+    if (modus == 0) {
+        modus = 1
+    }
+    if (modus == 1) {
+        modus = 0
     }
 })
-let mode = 0
+let modus = 0
 let messen = 0
 messen = 0
+modus = 0
 basic.showLeds(`
     . . . . .
     . . . . .
@@ -57,9 +59,56 @@ basic.forever(function () {
     }
 })
 basic.forever(function () {
-    if (messen == 1) {
-        basic.showNumber(input.lightLevel() / 255 * 100)
-    } else {
-        basic.clearScreen()
+    if (messen == 0) {
+        if (0 < input.lightLevel() && input.lightLevel() < 52) {
+            basic.clearScreen()
+            basic.showLeds(`
+                . . . . .
+                . . . . .
+                . . . . .
+                . . . . .
+                # # # # #
+                `)
+        }
+        if (51 < input.lightLevel() && input.lightLevel() < 103) {
+            basic.clearScreen()
+            basic.showLeds(`
+                . . . . .
+                . . . . .
+                . . . . .
+                # # # # #
+                # # # # #
+                `)
+        }
+        if (102 < input.lightLevel() && input.lightLevel() < 154) {
+            basic.clearScreen()
+            basic.showLeds(`
+                . . . . .
+                . . . . .
+                # # # # #
+                # # # # #
+                # # # # #
+                `)
+        }
+        if (153 < input.lightLevel() && input.lightLevel() < 205) {
+            basic.clearScreen()
+            basic.showLeds(`
+                . . . . .
+                # # # # #
+                # # # # #
+                # # # # #
+                # # # # #
+                `)
+        }
+        if (204 < input.lightLevel() && input.lightLevel() < 256) {
+            basic.clearScreen()
+            basic.showLeds(`
+                # # # # #
+                # # # # #
+                # # # # #
+                # # # # #
+                # # # # #
+                `)
+        }
     }
 })
